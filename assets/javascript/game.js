@@ -60,36 +60,52 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
        document.getElementById("message1").innerHTML = 'Game Over';
      }
    }
- 
-   //update display
 
-      document.getElementById("incWord").innerHTML = displaySol;
-      
+   numGuesses +=1;
+  
   //keep stats current
 
-      Stats(10-numMisses, lettersChosen, displaySol,Wins,Losses);
+  Stats(10-numMisses, lettersChosen, displaySol,Wins,Losses);
   
   
-
-
-  // if all guesses have been used up before the word is solved, show answer, 
-  // increment 'losses' by 1 and offer to start a new game.
-
+  
   // if the entire word is solved before guesses have been used up, increment
   // 'wins' by 1 and set up a new word. (or prompt for another game)
+    if (isSolved() == true){
+      document.getElementById("message1").innerHTML = 'Congratulations!  You win!';
+      document.getElementById("message2").innerHTML = 'Start a new word?';
+      numMisses = 0;
+      numGuesses = 0;
+      lettersChosen = []; 
+      Wins += 1;
+    }
+// if all guesses have been used up before the word is solved, show answer, 
+  // increment 'losses' by 1 and offer to start a new game.
 
-  numGuesses +=1;
+  
+  
+    if(numMisses == 10){
+       document.getElementById("message1").innerHTML = 'No more guesses! Your word was: ' + word;
+       document.getElementById("message2").innerHTML = 'Start a new word?';
+       numMisses = 0;
+       numGuesses = 0;
+       lettersChosen = []; 
+       Losses += 1;  
+    }
+  
+  //update display
 
-  if(numMisses == 10){
-    document.getElementById("message1").innerHTML = 'No more guesses! Your word was: ' + word;
-    document.getElementById("message2").innerHTML = 'Start a new word?';
-    numMisses = 0;
-    numGuesses = 0;   
-  }
+  document.getElementById("incWord").innerHTML = displaySol;
+  
+  //keep stats current
 
+  Stats(10-numMisses, lettersChosen, displaySol,Wins,Losses);
+
+
+  
 }   // end of new letter function
 
-
+//-------------------------begin function definitions------------------------------------
   // function for keeping stats updated
 
   function Stats( m,letters,inc,w,l){     
@@ -115,3 +131,14 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
     }
     return blanks;
   }
+
+  //function for checking if word is completely solved
+   function isSolved(){
+     complete = true;
+     for(var k =0; k < word.length; k++){
+        if (word[k] != displaySol[k]) {
+          complete = false;
+        }
+     }
+     return complete;
+   }
