@@ -67,7 +67,7 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
       
   //keep stats current
 
-      Stats(10-numMisses, lettersChosen, displaySol);
+      Stats(10-numMisses, lettersChosen, displaySol,Wins,Losses);
   
   
 
@@ -92,10 +92,12 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
 
   // function for keeping stats updated
 
-  function Stats( m,l,w){     
+  function Stats( m,letters,inc,w,l){     
     document.getElementById("misses").innerHTML = m;
-    document.getElementById("letterslist").innerHTML = l;
-    document.getElementById("incWord").innerHTML = w;
+    document.getElementById("letterslist").innerHTML = letters;
+    document.getElementById("incWord").innerHTML = inc;
+    document.getElementById("wins").innerHTML = w;
+    document.getElementById("losses").innerHTML = l;
   }
 
   function ranWord(){
