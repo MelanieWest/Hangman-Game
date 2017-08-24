@@ -1,71 +1,75 @@
 var wordNum =0;
-var numGuesses = 8;
+var numGuesses = 0;
+var numMisses = 0;
 var Wins = 0;
 var Losses = 0;
 var word;
 var lettersChosen;
+var goodGuess = false;
 
 // Word bank, chosen from 'word of the day' in dictionary app
 
 var wordBank =['AVATAR', 'LEMON', 'KUMQUAT', 'TACO', 'BANAUSIC', 'DAYMARE', 'KIBITZER', 'PALUDAL', 'NIMBUS', 'ERGATE', 'MUSIC', 'SANDWICH'];
 var wordBank2 =[ 'FLOWER', 'POLEMIC', 'PALINDROME', 'MANGO', 'URCHIN', 'QUARK', 'PULSAR', 'BANK', 'EGGROLL'];
 
-var begin = prompt("Press any key to begin");
+
+var begin = prompt("Press any letter to begin guessing");
     
-//select the words in order, to avoid repetition
-//determine the word length and write the correct # of blanks onscreen
+ // have the player guess a letter
+document.getElementById("message1").innerHTML = 'Guess a letter: ';
+    
+document.onkeyup = function(event) {        //this is where iterations begin --word and blanks are set already
 
-for (var i = 0; i < wordBank.length; i++) {
+  if(numGuesses == 0) {   //if we are starting a new round
+    word = ranWord();     //select a new word
+    lettersChosen = [];   //zero out string of guesses
+     //initialize the solution display (all blanks)
+    var displaySol= initBlanks(word);     //set up an array of the correct # of blanks
+    document.getElementById("incWord").innerHTML = displaySol;  //display the blanks
+  }
 
-  word = wordBank[i];   //new word
-  console.log(word);
-
-  lettersChosen = [];   //zero out string of guesses
-  //var indexArray = [];      //zero out indices of correct guesses
-
- 
-
-  //initialize the solution display (all blanks)
-  var displaySol= initBlanks(word);
-  document.getElementById("incWord").innerHTML = displaySol;
- 
-
-    // have the player guess a letter
-  document.getElementById("message1").innerHTML = 'Guess a letter: ';
-
-  document.onkeyup = function(event) {        //this is where iterations begin --word and blanks are set already
 
   // Determines which letter was selected.
-  var userLet = event.key;
+    var userLet = event.key;
     console.log(userLet);
   
   //store each guess into a new string for on-screen display of all guesses
 
   userLet = userLet.toUpperCase();    //all uppercase letters
-  lettersChosen += userLet;   //append array for display
+  lettersChosen.push(userLet)   //append array for display
 
-  wordSolution(word,displaySol,userLet)
-  document.getElementById("incWord").innerHTML = displaySol;
-   
+  //goodGuess = wordSolution(word,userLet);   //boolean 'true' if the letter is in the word
+  //also, wordSolution modifies the display.  Can a function do two things?
+
   
-  // Turn the word (string) into an array. loop through word to find all matches;
-    for (j=0; j< word.length; j++){
-      if (userLet== word[j]){
-        indexArray += j.toString(); //concatenate indices of solved letters.
+    match = false;   // set to false until proven otherwise
+
+// reset the displayed partial word to include correctly guessed letters.  If none, count as a miss
+
+    for (var j=0; j < word.length; j++){      //this area has troubles.  Was a function, didn't work.  Try here.
+      if(word[j]==userLet) {
+        displaySol[j] = userLet;
+        match = true;
       }
-        //  store locations of each match, if there is one or more matches.
-        // (sort this array each time for simplicity?...)
-        
-        // OR... just count how many characters have been guessed and compare that count
-        // to word.length.  I think this will be easier.  This won't protect them from guessin
-        //the same letter twice, though.
-
-        // if no matches, decrement 'guesses remaining' by one and prompt for another guess
-      
     }
-  
 
-} //end of 'new letter' block
+    //count misses and determine if game is over
+    if (match == false) {   //if not in word, increment misses up to max value of 10
+    numMisses += 1;
+   if (numMisses == 10) {
+       document.getElementById("message1").innerHTML = 'Game Over';
+     }
+   }
+ 
+   //update display
+
+      document.getElementById("incWord").innerHTML = displaySol;
+      
+  //keep stats current
+
+      Stats(numGuesses, lettersChosen, displaySol);
+  
+  
 
 
   // if all guesses have been used up before the word is solved, show answer, 
@@ -74,35 +78,37 @@ for (var i = 0; i < wordBank.length; i++) {
   // if the entire word is solved before guesses have been used up, increment
   // 'wins' by 1 and set up a new word. (or prompt for another game)
 
+  numGuesses -=1;
 
-}   // end of for loop - new word is chosen once I get to here
+  if(numGuesses == 0){
+    document.getElementById("message1").innerHTML = 'No more guesses! Your word was: ' + word;
+    document.getElementById("message2").innerHTML = 'Start a new word?';
+    numGuesses == 8;    
+  }
+
+}   // end of new letter function
 
 
   // function for keeping stats updated
 
-  function Stats( w,l,n){     
-    document.getElementById("wintext").innerHTML = w;
-    document.getElementById("losstext").innerHTML = l;
-    document.getElementById("remtext").innerHTML = 3-n;
+  function Stats( g,l,w){     
+    document.getElementById("guesses").innerHTML = g;
+    document.getElementById("letterslist").innerHTML = l;
+    document.getElementById("incWord").innerHTML = w;
   }
+
+  function ranWord(){
+    randomWord = wordBank[Math.floor(Math.random()*wordBank.length)] ;   //new randomly selected word
+    console.log(randomWord);
+  return randomWord;
+ }
+
 
   //function for updating display after each new word is selected
   function initBlanks(answer){
     var blanks = [];
     for (var index= 0; index < answer.length; index++){
-        blanks.push = '_';
+        blanks.push('_');
     }
     return blanks;
   }
-
-//modify displayed solution if their guess is correct
-
-  function wordSolution(answer,dispSol,currLetter) {
-    
-    for (var index=0; index < answer.length; index++){
-      if(answer[index]==currLetter) {
-        dispSol[index] = currLetter;
-      }
-    }
-  }
-  
