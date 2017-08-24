@@ -24,3 +24,11 @@ p{
     width: 120px;
 }
 
+#incWord {
+    background-color: yellow;
+    color: blue;
+    margin: auto;
+    padding: 30px;
+    font-size: 24px;
+}
+

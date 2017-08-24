@@ -3,9 +3,10 @@ var numGuesses = 0;
 var numMisses = 0;
 var Wins = 0;
 var Losses = 0;
-var word;
-var lettersChosen;
-var displaySol;
+var word='';
+var lettersChosen=[];
+var displaySol=[];
+var solutionShow = '';
 
 // Word bank, chosen from 'word of the day' in dictionary app
 
@@ -25,7 +26,6 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
     lettersChosen = [];   //zero out string of guesses
      //initialize the solution display (all blanks)
     displaySol= initBlanks(word);     //set up an array of the correct # of blanks
-    console.log
     document.getElementById("incWord").innerHTML = displaySol;  //display the blanks
   }
 
@@ -46,12 +46,12 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
 
     for (var j=0; j < word.length; j++){      //this area has troubles.  Was a function, didn't work.  Try here.
       if(word[j]==userLet) {
-        console.log(displaySol[j]);
+ //       console.log(displaySol[j]);
         displaySol[j] = userLet;
         match = true;
       }
     }
-    console.log(displaySol);
+ //   console.log(displaySol);
 
     //count misses and determine if game is over
     if (match == false) {   //if not in word, increment misses up to max value of 10
@@ -63,17 +63,21 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
 
    numGuesses +=1;
   
-  //keep stats current
 
-  Stats(10-numMisses, lettersChosen, displaySol,Wins,Losses);
+
+//make text display better (without commas)
+  solutionShow = printToDocument(displaySol);
+  lettersShow  = printToDocument(lettersChosen);
   
+  //keep stats current
+  Stats(10-numMisses, lettersShow, solutionShow ,Wins,Losses);
   
   
   // if the entire word is solved before guesses have been used up, increment
   // 'wins' by 1 and set up a new word. (or prompt for another game)
-    if (isSolved() == true){
+    if (isSolved(word, displaySol) == true){
       document.getElementById("message1").innerHTML = 'Congratulations!  You win!';
-      document.getElementById("message2").innerHTML = 'Start a new word?';
+      document.getElementById("message2").innerHTML = 'type a letter to start guessing a new word.';
       numMisses = 0;
       numGuesses = 0;
       lettersChosen = []; 
@@ -93,13 +97,16 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
        Losses += 1;  
     }
   
-  //update display
-
+ 
   document.getElementById("incWord").innerHTML = displaySol;
   
+ // make answer display better (without commas)
+  solutionShow = printToDocument(displaySol);
+  lettersShow = printToDocument(lettersChosen);
+
   //keep stats current
 
-  Stats(10-numMisses, lettersChosen, displaySol,Wins,Losses);
+  Stats(10-numMisses, lettersShow, solutionShow, Wins, Losses);
 
 
   
@@ -132,11 +139,19 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
     return blanks;
   }
 
+  function printToDocument(d){
+    var printDoc = '';
+    for(var i = 0; i< d.length; i++) {
+      printDoc += d[i]+' ';
+    }
+    return printDoc;
+  }
+
   //function for checking if word is completely solved
-   function isSolved(){
+   function isSolved(w,d){
      complete = true;
-     for(var k =0; k < word.length; k++){
-        if (word[k] != displaySol[k]) {
+     for(var k =0; k < w.length; k++){
+        if (w[k] != d[k]) {   //compare their solution to actual
           complete = false;
         }
      }
