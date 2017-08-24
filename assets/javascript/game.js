@@ -16,7 +16,7 @@ var wordBank2 =[ 'FLOWER', 'POLEMIC', 'PALINDROME', 'MANGO', 'URCHIN', 'QUARK', 
 var begin = prompt("Press any letter to begin guessing");
     
  // have the player guess a letter
-document.getElementById("message1").innerHTML = 'Guess a letter: ';
+document.getElementById("message1").innerHTML = 'Type your next guess ';
     
 document.onkeyup = function(event) {        //this is where iterations begin --word and blanks are set already
 

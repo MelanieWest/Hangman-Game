@@ -1,10 +1,26 @@
 body {
     background-color: blue;
     font-family: Helvetica;
+    background-image: url("../images/Word_of_day.jpg");
 }
 
 h1,h2,p,ol,li {
     color: yellow;
     text-align: center;
+}
+
+h1 {
+    font-size: 40px;
+    background-color: red;
+    text-align: center;
+    margin: auto;    
+    width: 400px;    
+}
+
+p{
+    background-color: red;
+    text-align: center; 
+    margin: auto;   
+    width: 120px;
 }
 
