@@ -5,7 +5,7 @@ var Wins = 0;
 var Losses = 0;
 var word;
 var lettersChosen;
-var goodGuess = false;
+var displaySol;
 
 // Word bank, chosen from 'word of the day' in dictionary app
 
@@ -24,7 +24,8 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
     word = ranWord();     //select a new word
     lettersChosen = [];   //zero out string of guesses
      //initialize the solution display (all blanks)
-    var displaySol= initBlanks(word);     //set up an array of the correct # of blanks
+    displaySol= initBlanks(word);     //set up an array of the correct # of blanks
+    console.log
     document.getElementById("incWord").innerHTML = displaySol;  //display the blanks
   }
 
@@ -37,26 +38,25 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
 
   userLet = userLet.toUpperCase();    //all uppercase letters
   lettersChosen.push(userLet)   //append array for display
-
-  //goodGuess = wordSolution(word,userLet);   //boolean 'true' if the letter is in the word
-  //also, wordSolution modifies the display.  Can a function do two things?
-
-  
+  console.log(lettersChosen);
+    
     match = false;   // set to false until proven otherwise
 
 // reset the displayed partial word to include correctly guessed letters.  If none, count as a miss
 
     for (var j=0; j < word.length; j++){      //this area has troubles.  Was a function, didn't work.  Try here.
       if(word[j]==userLet) {
+        console.log(displaySol[j]);
         displaySol[j] = userLet;
         match = true;
       }
     }
+    console.log(displaySol);
 
     //count misses and determine if game is over
     if (match == false) {   //if not in word, increment misses up to max value of 10
-    numMisses += 1;
-   if (numMisses == 10) {
+      numMisses += 1;
+    if (numMisses == 10) {
        document.getElementById("message1").innerHTML = 'Game Over';
      }
    }
@@ -67,7 +67,7 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
       
   //keep stats current
 
-      Stats(numGuesses, lettersChosen, displaySol);
+      Stats(10-numMisses, lettersChosen, displaySol);
   
   
 
@@ -78,12 +78,13 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
   // if the entire word is solved before guesses have been used up, increment
   // 'wins' by 1 and set up a new word. (or prompt for another game)
 
-  numGuesses -=1;
+  numGuesses +=1;
 
-  if(numGuesses == 0){
+  if(numMisses == 10){
     document.getElementById("message1").innerHTML = 'No more guesses! Your word was: ' + word;
     document.getElementById("message2").innerHTML = 'Start a new word?';
-    numGuesses == 8;    
+    numMisses = 0;
+    numGuesses = 0;   
   }
 
 }   // end of new letter function
@@ -91,8 +92,8 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
 
   // function for keeping stats updated
 
-  function Stats( g,l,w){     
-    document.getElementById("guesses").innerHTML = g;
+  function Stats( m,l,w){     
+    document.getElementById("misses").innerHTML = m;
     document.getElementById("letterslist").innerHTML = l;
     document.getElementById("incWord").innerHTML = w;
   }

@@ -1,0 +1,10 @@
+body {
+    background-color: blue;
+    font-family: Helvetica;
+}
+
+h1,h2,p,ol,li {
+    color: yellow;
+    text-align: center;
+}
+
