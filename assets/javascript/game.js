@@ -9,14 +9,14 @@ var displaySol=[];
 var solutionShow = '';
 
 // Word bank, chosen from 'word of the day' in dictionary app
-// workd banks for life and science have been added for future options (not yet used)
+// word banks for life and science have been added for future options (not yet used)
 
-var wordBank =['GRAVID','COMSTOCKERY','THEINE','CONFABULATE','ULULATE','ICONOCLASTIC',
+var wordBank =['FUNSTER', 'GRAVID','COMSTOCKERY','THEINE','CONFABULATE','ULULATE','ICONOCLASTIC',
 'ARVO','VENTIFACT','PALINDROME', 'POLEMIC', 'KUMQUAT', 'TACO', 'BANAUSIC', 'DAYMARE', 
-'KIBITZER', 'PALUDAL', 'NIMBUS', 'ERGATE', 'MUSSITATION', 'FRUCTIFY','CONSUETUDE',
+'KIBITZER', 'PALUDAL', 'NIMBUS', 'ERGATE', 'MUSSITATION', 'FRUCTIFY','CONSUETUDE','INCOGNITANT',
 'DORP','ANOESIS','VARIEGATED','BALLON','BUMFUZZLE','AUTARKY','LITOTES','HIGHFALUTIN'];
-var wordlife =[ 'FLOWER', 'MANGO', 'URCHIN','EXERCISE','DIET','EAT','REPRODUCE','BREATHE', 
-'EGGROLL','LEMON', 'AVATAR','TACO', 'MUSIC','SANDWICH','COMPLEX','LOVE'];
+var wordlife =[ 'FLOWER', 'MANGO', 'URCHIN','EXERCISE','DIET','EAT','REPRODUCE','BREATHE','ANGEL','DEMON', 
+'EGGROLL','LEMON', 'AVATAR','TACO', 'MUSIC','SANDWICH','COMPLEX','LOVE','EPIPHANY','NEMESIS'];
 var wordSci =['QUARK','PULSAR','CUMULUS','PHASE','FUNCTION','SINGULARITY','STATE',
 'GRAVITY','ENERGY','FUNDAMENTAL','LAWS','PROPERTIES','CONDENSE','ESSENCE','WAVES']
 
@@ -25,6 +25,7 @@ var wordSci =['QUARK','PULSAR','CUMULUS','PHASE','FUNCTION','SINGULARITY','STATE
 $("#start").on("click", function(){ // initialize word and counts with 'start' button
   word = ranWord();     //select a new word
   lettersChosen = [];   //zero out string of guesses
+  numMisses = 0;
    //initialize the solution display (all blanks)
   displaySol= initBlanks(word);     //set up an array of the correct # of blanks
   //make text display better (without commas)
@@ -32,10 +33,11 @@ $("#start").on("click", function(){ // initialize word and counts with 'start' b
   lettersShow  = printToDocument(lettersChosen);
   //keep stats current
   Stats(10-numMisses, lettersShow, solutionShow ,Wins,Losses);
+  document.getElementById("message1").innerHTML = ' ';
 });     //end of 'start' button block
 
-//prompt the player to guess/type a letter
-document.getElementById("message1").innerHTML = 'Type the letter of your first guess: ';
+
+
 
 // this next block executes until the word is completed or guesses are used up
     
@@ -54,38 +56,21 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
 
   // reset the displayed partial word to include correctly guessed letters.  If none, count as a miss
 
-  for (var j=0; j < word.length; j++){      //this area has troubles.  Was a function, didn't work.  Try here.
+  for (var j=0; j < word.length; j++){      
     if(word[j]==userLet) {
       displaySol[j] = userLet;
       match = true;
     }
   }
 
-  //count misses and determine if game is over
-  if (match == false) {   //if not in word, increment misses up to max value of 10
-    numMisses += 1;
-    if (numMisses == 10) {
-      document.getElementById("message1").innerHTML = 'Game Over';
-    }
-  }
 
-  numGuesses +=1;
-  
-
-
-  //make text display better (without commas)
-  solutionShow = printToDocument(displaySol);
-  lettersShow  = printToDocument(lettersChosen);
-  
-  //keep stats current
-  Stats(10-numMisses, lettersShow, solutionShow ,Wins,Losses);
+  numGuesses +=1;   // increment before stats are displayed
   
   
   // if the entire word is solved before guesses have been used up, increment
   // 'wins' by 1 and set up a new word. (or prompt for another game)
   if (isSolved(word, displaySol) == true){
     document.getElementById("message1").innerHTML = 'Congratulations!  You win!';
-    document.getElementById("message2").innerHTML = "Click on 'START' for a new word";
     numMisses = 0;
     numGuesses = 0;
     lettersChosen = []; 
@@ -93,15 +78,16 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
   }
   // if all guesses have been used up before the word is solved, show answer, 
   // increment 'losses' by 1 and offer to start a new game.
-  
+  //count misses
+  if (match == false) {   //if not in word, increment misses up to max value of 10
+    numMisses += 1;
     if(numMisses == 10){
        document.getElementById("message1").innerHTML = 'No more guesses! Your word was: ' + word;
-       document.getElementById("message2").innerHTML = "Click on 'START' for a new word";
-       numMisses = 0;
        numGuesses = 0;
        lettersChosen = []; 
        Losses += 1;  
     }
+  }
   
  
   document.getElementById("incWord").innerHTML = displaySol;
