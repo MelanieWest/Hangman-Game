@@ -39,21 +39,25 @@ h2,ol,li {
 }
 
 
-h3{
+#message1{
     background-color: red;
     color: blue;
     font-size: 24px;
     text-align: center; 
-    margin: auto; 
+    margin: 5px; 
     padding: 5px;  
-    width: 250px;
+    width: 350px;
+    height: 60px;
+    border-radius: 8px;
+    border: 3px solid blue;
+    
 }
 #word{
     background-color: yellow;
     color: blue;
     width: 350px;
     margin: auto;
-    padding: 30px;
+    padding: 20px;
     border: 3px solid blue;
     border-radius: 8px;
 }
@@ -65,13 +69,14 @@ h3{
 #letters{
     background-color: yellow;
     color: blue;
-    width: 280px;
-    padding: 30px;
+    width: 350px;
+    padding: 20px;
     font-size: 20px;
     margin: auto;
     border: 3px solid blue;
     border-radius: 8px;
 }
+
 .rules{
     background-color: white;
     opacity: .85;
