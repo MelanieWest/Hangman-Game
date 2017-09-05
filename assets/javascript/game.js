@@ -20,6 +20,13 @@ var wordlife =[ 'FLOWER', 'MANGO', 'URCHIN','EXERCISE','DIET','EAT','REPRODUCE',
 var wordSci =['QUARK','PULSAR','CUMULUS','PHASE','FUNCTION','SINGULARITY','STATE',
 'GRAVITY','ENERGY','FUNDAMENTAL','LAWS','PROPERTIES','CONDENSE','ESSENCE','WAVES']
 
+//topic selector buttons added to vary word banks (still need to make functions)
+
+document.getElementById("day").addEventListener("click",wordBankselectorfcn);
+document.getElementById("life").addEventListener("click",wordLifeselectorfcn);
+document.getElementById("sci").addEventListener("click",wordSciselectorfcn);
+document.getElementById("easy").addEventListener("click",wordEasyselectorfcn);
+
 //A 'start' button has been added - it is used to reset the word and guess count
 
 $("#start").on("click", function(){ // initialize word and counts with 'start' button
@@ -130,11 +137,13 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
   }
 
   function printToDocument(d){
-    var printDoc = '';
-    for(var i = 0; i< d.length; i++) {
-      printDoc += d[i]+' ';
-    }
-    return printDoc;
+    printDoctoString = d.join(' ');
+    // var printDoc = '';
+    // for(var i = 0; i< d.length; i++) {
+    //   printDoc += d[i]+' ';
+    // }
+    // return printDoc;
+    return printDoctoString;
   }
 
   //function for checking if word is completely solved
