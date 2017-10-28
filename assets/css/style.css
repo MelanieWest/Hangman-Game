@@ -92,9 +92,10 @@ h2,ol,li {
 
 .rules{
     background-color: white;
+    float: right;
     opacity: .85;
     height: 240px;
-    width: 280px;
+    width: 320px;
     border: 3px solid blue;
     border-radius: 8px;   
 }

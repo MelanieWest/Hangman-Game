@@ -18,19 +18,21 @@ var wordBank =['FUNSTER', 'GRAVID','COMSTOCKERY','THEINE','CONFABULATE','ULULATE
 var wordlife =[ 'FLOWER', 'MANGO', 'URCHIN','EXERCISE','DIET','EAT','REPRODUCE','BREATHE','ANGEL','DEMON', 
 'EGGROLL','LEMON', 'AVATAR','TACO', 'MUSIC','SANDWICH','COMPLEX','LOVE','EPIPHANY','NEMESIS'];
 var wordSci =['QUARK','PULSAR','CUMULUS','PHASE','FUNCTION','SINGULARITY','STATE',
-'GRAVITY','ENERGY','FUNDAMENTAL','LAWS','PROPERTIES','CONDENSE','ESSENCE','WAVES']
+'GRAVITY','ENERGY','FUNDAMENTAL','LAWS','PROPERTIES','CONDENSE','ESSENCE','WAVES'];
+var wordEasy = ['APPLE','PUPPY','KITTEN','HOUSE','SOCCER','LUNCH','BASEBALL','GAME'];
 
 //topic selector buttons added to vary word banks (still need to make functions)
 
-document.getElementById("day").addEventListener("click",wordBankselectorfcn);
-document.getElementById("life").addEventListener("click",wordLifeselectorfcn);
-document.getElementById("sci").addEventListener("click",wordSciselectorfcn);
-document.getElementById("easy").addEventListener("click",wordEasyselectorfcn);
+// document.getElementById("day").addEventListener("click",wordBankselectorfcn);
+// document.getElementById("life").addEventListener("click",wordLifeselectorfcn);
+// document.getElementById("sci").addEventListener("click",wordSciselectorfcn);
+// document.getElementById("easy").addEventListener("click",wordEasyselectorfcn);
+
 
 //A 'start' button has been added - it is used to reset the word and guess count
 
 $("#start").on("click", function(){ // initialize word and counts with 'start' button
-  word = ranWord();     //select a new word
+  word = ranWord(wordBank);     //select a new word
   lettersChosen = [];   //zero out string of guesses
   numMisses = 0;
    //initialize the solution display (all blanks)
@@ -120,8 +122,8 @@ document.onkeyup = function(event) {        //this is where iterations begin --w
     document.getElementById("losses").innerHTML = l;
   }
 
-  function ranWord(){
-    randomWord = wordBank[Math.floor(Math.random()*wordBank.length)] ;   //new randomly selected word
+  function ranWord(wordArray){
+    randomWord = wordArray[Math.floor(Math.random()*wordArray.length)] ;   //new randomly selected word
     console.log(randomWord);
   return randomWord;
  }
