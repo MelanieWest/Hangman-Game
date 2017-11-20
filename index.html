@@ -1,117 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />  --> 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
- <link rel = "stylesheet" type = "text/css" href = "assets/css/style.css">    
-    <title>Hangman</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />  -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+    crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <title>Hangman</title>
 </head>
 
 <body>
-<header> Word of the Day Hangman </header>
-<br>
+  <header>
+    <div class="row">Word of the Day Hangman
+      <div class="col"></div>
+      W:
+      <div class="col" id="wins"></div>
+      L:
+      <div class="col" id="losses"></div>
+      R:
+      <div class="col" id="misses"></div>
+    </div>
+  </header>
+  <br>
 
-<div class="container">
-  <div class="row">
-      <div class = "col-md-4  stats">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4  stats">
+        <!-- <h2>W:    <span id="wins"></span></h2>
+        <br>
+        <h2>L:    <span id="losses"></span></h2>  
+        <br> -->
+        <!-- <h2>Misses Remaining:
+          <span id="misses"></span>
+        </h2>
+        <br> -->
 
+        <div class = "row">
             
-       <h2>Wins:    <span id="wins"></span></h2>
-        <br>
-        <h2>Losses:    <span id="losses"></span></h2>  
-        <br>
-        <h2>Misses Remaining:    <span id="misses"></span></h2>
-        <br> 
+                        <div class = "col btn btn-primary" id="day">
+                          <p>Word of the Day</p>
+                          <p>(default)</p>
+                        </div>
+            
+                        <div class = "col btn btn-primary" id="life">
+                          <p>Life Words</p>
+                        </div>
+            
+                      </div>
+            
+                      <div class = "row">
+            
+                        <div class = "col btn btn-primary" id="sci">
+                          <p>Physical Science</p>
+                        </div>
+            
+                        <div class = "col btn btn-primary" id="easy">
+                          <p>Easy</p>
+                        </div> 
+            
+                      </div>
+            
+
       </div>
 
       <br>
-     
 
-      <div class = "col-md-4">
 
-        <div class = "row">
-          <div class = "col">
+      <div class="col-md-4">
+
+        <!-- <div class="row">
+          <div class="col">
             <h2 id="start"> START </h2>
+          </div>
+        </div> -->
+
+        <div class="row">
+          <div class="col">
+            <h2 id="word">
+              <span id="incWord"></span>
+            </h2>
           </div>
         </div>
 
-        <div class = "row">
-            <div class = "col">  
-            <h2 id = "word">    
-              <span id="incWord"></span>
-            </h2>
-            </div>
-        </div>
-
-        <div class = "row">
-            <div class = "col">  
-            <h2 id = "letters">   
+        <div class="row">
+          <div class="col">
+            <h2 id="letters">
               <span id="letterslist"></span>
             </h2>
           </div>
         </div>
 
-        <div class = "row">
-            <div class = "col">
-              <h3 id="message1"></h3>
-            </div>
-        </div>
-        <!-- <div class="options">
-
-          <div class = "row">
-
-            <div class = "col btn btn-primary" id="day">
-              <p>Word of the Day</p>
-              <p>(default)</p>
-            </div>
-
-            <div class = "col btn btn-primary" id="life">
-              <p>Life Words</p>
-            </div>
-
+        <div class="row">
+          <div class="col">
+            <h3 id="message1"></h3>
           </div>
-
-          <div class = "row">
-
-            <div class = "col btn btn-primary" id="sci">
-              <p>Physical Science</p>
-            </div>
-
-            <div class = "col btn btn-primary" id="easy">
-              <p>Easy</p>
-            </div> 
-
-          </div>  -->
-        
         </div>
-        <br>
-        <br>
+        <div class="options">
+
 
       </div>
-      <div class= "col-md-4 rules">
-        
-          <ol> Rules of the game:
-            <li> Choose a theme</li>
-              <li> Press 'Start' to begin a new word
-              <li> Guess the letters in the word, one at a time </li>
-              <li> If you guess the correct word, you win! </li>
-              <li> If you guess 10 incorrect letters, you lose! </li>
-          </ol>
-      
-   
+      <br>
+      <br>
+
     </div>
-    
+    <div class="col-md-4 rules">
+
+      <ol> Rules of the game:
+        <li> Choose a theme</li>
+        <li> Press 'Start' to begin a new word
+          <li> Guess the letters in the word, one at a time </li>
+          <li> If you guess the correct word, you win! </li>
+          <li> If you guess 10 incorrect letters, you lose! </li>
+      </ol>
+
+
+    </div>
+
   </div>
-</div>
+  </div>
 
-<br>
-<br>
+  <br>
+  <br>
 
-    <script src = "assets/javascript/game.js" ></script>               
+  <script src="assets/javascript/game.js"></script>
 
-  </body>
+</body>
+
 </html>
