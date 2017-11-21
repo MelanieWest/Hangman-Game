@@ -46,8 +46,8 @@ $(".btn").on("click", function () { // initialize word and stats with a topic bu
   }
 
   // attempting to hide buttons and rules - not working yet
-  // document.getElementByClassName("btn").style.visibility="hidden";
-  // document.getElementByClassName("ol").style.visibility="hidden";
+  document.getElementById("rules").style.visibility="hidden";
+  document.getElementById("options").style.visibility="hidden";
 
   lettersChosen = [];   //zero out string of guesses
   numMisses = 0;
@@ -120,6 +120,8 @@ userLet = userLet.toUpperCase();    //all uppercase letters
     numGuesses = 0;
     lettersChosen = [];
     Wins += 1;
+    document.getElementById("rules").style.visibility="visible";
+    document.getElementById("options").style.visibility="visible";
   }
 
   // if all guesses have been used up before the word is solved, show answer, 
@@ -134,6 +136,8 @@ userLet = userLet.toUpperCase();    //all uppercase letters
       numGuesses = 0;
       lettersChosen = [];
       Losses += 1;
+      document.getElementById("rules").style.visibility="visible";
+      document.getElementById("options").style.visibility="visible";  
     }
   }
 

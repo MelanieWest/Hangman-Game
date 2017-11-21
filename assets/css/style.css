@@ -92,7 +92,7 @@ ol,li {
     border-radius: 8px;
 }
 
-.rules{
+#rules{
     background-color: white;
     float: right;
     opacity: .85;
@@ -103,8 +103,8 @@ ol,li {
 }
 
 .mastfoot {
-    background-color: blue;
-    color: white;
+    background-color: lightblue;
+    color: blue;
     text-align:center;
 }
 
