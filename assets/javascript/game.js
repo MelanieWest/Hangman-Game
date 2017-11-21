@@ -45,14 +45,20 @@ $(".btn").on("click", function () { // initialize word and stats with a topic bu
       break;
   }
 
+  // attempting to hide buttons and rules - not working yet
+  // document.getElementByClassName("btn").style.visibility="hidden";
+  // document.getElementByClassName("ol").style.visibility="hidden";
 
   lettersChosen = [];   //zero out string of guesses
   numMisses = 0;
+
   //initialize the solution display (all blanks)
   displaySol = initBlanks(word);     //set up an array of the correct # of blanks
-  //make text display better (without commas)
+
+  //make text display better than an array list (without commas and with spaces)
   solutionShow = printToDocument(displaySol);
   lettersShow = printToDocument(lettersChosen);
+
   //keep stats current
   Stats(10 - numMisses, lettersShow, solutionShow, Wins, Losses);
 
@@ -149,11 +155,11 @@ userLet = userLet.toUpperCase();    //all uppercase letters
 // function for keeping stats updated
 
 function Stats(m, letters, inc, w, l) {
-  document.getElementById("misses").innerHTML = m;
+  document.getElementById("misses").innerHTML ="R:  "+m;
   document.getElementById("letterslist").innerHTML = letters;
   document.getElementById("incWord").innerHTML = inc;
-  document.getElementById("wins").innerHTML = w;
-  document.getElementById("losses").innerHTML = l;
+  document.getElementById("wins").innerHTML = "W: "+w;
+  document.getElementById("losses").innerHTML ="L: "+ l;
 }
 
 function ranWord(wordArray) {
@@ -190,7 +196,8 @@ function printToDocument(d) {
 
 
   function isLetter(str) {
-    return /^[a-zA-Z]*$/.test(str);
+//    return /^[a-zA-Z]*$/.test(str);
+    return /^[a-zA-Z]$/.test(str);
   }
  
 
