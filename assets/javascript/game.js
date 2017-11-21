@@ -67,6 +67,13 @@ document.onkeyup = function (event) {        //this is where iterations begin --
   var userLet = event.key;
   console.log(userLet);
 
+  var check = isLetter(userLet);   //check if the input is a letter
+
+  console.log(check);     //return without action if not a letter
+  if(!check){
+    return;
+  }
+ 
   //store each guess into a new string for on-screen display of all guesses
 
   userLet = userLet.toUpperCase();    //all uppercase letters
@@ -158,6 +165,15 @@ function printToDocument(d) {
   // return printDoc;
   return printDoctoString;
 }
+
+
+
+  function isLetter(str) {
+    return /^[a-zA-Z]*$/.test(str);
+  }
+ 
+   //return charCode > 64 && charCode < 91 || charCode > 96 && charCode < 123; 
+
 
 //function for checking if word is completely solved
 function isSolved(w, d) {
