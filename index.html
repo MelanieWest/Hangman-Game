@@ -29,57 +29,27 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-md-4  stats">
-        <!-- <h2>W:    <span id="wins"></span></h2>
-        <br>
-        <h2>L:    <span id="losses"></span></h2>  
-        <br> -->
-        <!-- <h2>Misses Remaining:
-          <span id="misses"></span>
-        </h2>
-        <br> -->
 
-        <div class = "row">
-            
-                        <div class = "col btn btn-primary" id="day">
-                          <p>Word of the Day</p>
-                          <p>(default)</p>
-                        </div>
-            
-                        <div class = "col btn btn-primary" id="life">
-                          <p>Life Words</p>
-                        </div>
-            
-                      </div>
-            
-                      <div class = "row">
-            
-                        <div class = "col btn btn-primary" id="sci">
-                          <p>Physical Science</p>
-                        </div>
-            
-                        <div class = "col btn btn-primary" id="easy">
-                          <p>Easy</p>
-                        </div> 
-            
-                      </div>
-            
+
+      <div class="col-md-4 rules">
+
+        <ol> Rules of the game:
+          <li> Select a topic to begin a new word</li>
+          <li> Guess a letter by pressing it</li>
+          <li> If you guess the word before you make 10 incorrect guesses, you win! </li>
+        </ol>
 
       </div>
+          
+
 
       <br>
 
 
       <div class="col-md-4">
 
-        <!-- <div class="row">
-          <div class="col">
-            <h2 id="start"> START </h2>
-          </div>
-        </div> -->
-
         <div class="row">
-          <div class="col">
+          <div class="col word-div">
             <h2 id="word">
               <span id="incWord"></span>
             </h2>
@@ -87,7 +57,7 @@
         </div>
 
         <div class="row">
-          <div class="col">
+          <div class="col letters-div">
             <h2 id="letters">
               <span id="letterslist"></span>
             </h2>
@@ -95,32 +65,50 @@
         </div>
 
         <div class="row">
-          <div class="col">
-            <h3 id="message1"></h3>
+          <div class="col message-div">
+            <h3 id="message">
+             <span id="message1"></span>
+            </h3>
           </div>
         </div>
-        <div class="options">
+ 
+        <br>
+        <br>
+
+      </div>
+
+
+      <div class="col-md-4">
+          
+          <div class="row">
+  
+            <div class="col btn btn-primary" id="day">
+              <p>Word of the Day</p>
+            </div>
+  
+            <div class="col btn btn-primary" id="life">
+              <p>Life Words</p>
+            </div>
+  
+          </div>
+  
+          <div class="row">
+  
+            <div class="col btn btn-primary" id="sci">
+              <p>Physical Science</p>
+            </div>
+  
+            <div class="col btn btn-primary" id="easy">
+              <p>Easy</p>
+            </div>
+  
+          </div>
+  
+          
+      </div>
 
 
       </div>
-      <br>
-      <br>
-
-    </div>
-    <div class="col-md-4 rules">
-
-      <ol> Rules of the game:
-        <li> Choose a theme</li>
-        <li> Press 'Start' to begin a new word
-          <li> Guess the letters in the word, one at a time </li>
-          <li> If you guess the correct word, you win! </li>
-          <li> If you guess 10 incorrect letters, you lose! </li>
-      </ol>
-
-
-    </div>
-
-  </div>
   </div>
 
   <br>

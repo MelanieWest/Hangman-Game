@@ -29,15 +29,19 @@ $(".btn").on("click", function () { // initialize word and stats with a topic bu
   switch (this.id) {    //choose a random word from the selected word bank
     case "day":
       word = ranWord(wordBank);
+      document.getElementById("message1").innerHTML = 'Word of the Day';      
       break;
     case "life":
       word = ranWord(wordLife);
+      document.getElementById("message1").innerHTML = 'Life';
       break;
     case "sci":
       word = ranWord(wordSci);
+      document.getElementById("message1").innerHTML = 'Science';
       break;
     case "easy":
       word = ranWord(wordEasy);
+      document.getElementById("message1").innerHTML = 'Easy';
       break;
   }
 
@@ -51,8 +55,6 @@ $(".btn").on("click", function () { // initialize word and stats with a topic bu
   lettersShow = printToDocument(lettersChosen);
   //keep stats current
   Stats(10 - numMisses, lettersShow, solutionShow, Wins, Losses);
-  document.getElementById("message1").innerHTML = ' ';
-
 
 });     //end of 'start' button block
 
@@ -71,10 +73,10 @@ document.onkeyup = function (event) {        //this is where iterations begin --
 
   console.log(check);     //return without action if not a letter
   if(!check){
+    alert("Please enter a letter");
     return;
   }
 
-  //alert(userLet);
 
 userLet = userLet.toUpperCase();    //all uppercase letters
   for(var k=0; k<lettersChosen.length; k++){
