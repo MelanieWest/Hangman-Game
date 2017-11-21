@@ -73,16 +73,25 @@ document.onkeyup = function (event) {        //this is where iterations begin --
   if(!check){
     return;
   }
+
+  //alert(userLet);
+
+userLet = userLet.toUpperCase();    //all uppercase letters
+  for(var k=0; k<lettersChosen.length; k++){
+  if(userLet==lettersChosen[k]){
+    alert("You have already guessed "+ userLet);
+    return;
+  }
+}
  
   //store each guess into a new string for on-screen display of all guesses
 
-  userLet = userLet.toUpperCase();    //all uppercase letters
-  lettersChosen.push(userLet)   //append array for display
+  lettersChosen.push(userLet)   //append array of all guesses for display
 
   match = false;   // set to false until proven otherwise
 
   // reset the displayed partial word to include correctly guessed letters.  If none, count as a miss
-
+  
   for (var j = 0; j < word.length; j++) {
     if (word[j] == userLet) {
       displaySol[j] = userLet;
@@ -95,7 +104,8 @@ document.onkeyup = function (event) {        //this is where iterations begin --
 
 
   // if the entire word is solved before guesses have been used up, increment
-  // 'wins' by 1 and set up a new word. (or prompt for another game)
+  // 'wins' by 1 
+
   if (isSolved(word, displaySol) == true) {
     document.getElementById("message1").innerHTML = 'Congratulations!  You win!';
     numMisses = 0;
@@ -103,9 +113,12 @@ document.onkeyup = function (event) {        //this is where iterations begin --
     lettersChosen = [];
     Wins += 1;
   }
+
   // if all guesses have been used up before the word is solved, show answer, 
-  // increment 'losses' by 1 and offer to start a new game.
-  //count misses
+  // increment 'losses' by 1 
+
+  //otherwise, just increment the count for 'misses'
+
   if (match == false) {   //if not in word, increment misses up to max value of 10
     numMisses += 1;
     if (numMisses == 10) {
@@ -116,6 +129,7 @@ document.onkeyup = function (event) {        //this is where iterations begin --
     }
   }
 
+ // display the partial word after update
 
   document.getElementById("incWord").innerHTML = displaySol;
 
@@ -147,7 +161,10 @@ function ranWord(wordArray) {
 }
 
 
-//function for updating display after each new word is selected
+//function for updating display after each new word is selected.  Only include blanks in the
+// array, and not the spaces between.  That way when a correct letter is chosen, only the blank
+//needs to be replaced
+
 function initBlanks(answer) {
   var blanks = [];
   for (var index = 0; index < answer.length; index++) {
@@ -155,6 +172,8 @@ function initBlanks(answer) {
   }
   return blanks;
 }
+
+// this function is purely for display.  spaces are put between the blanks so they are distinct.
 
 function printToDocument(d) {
   printDoctoString = d.join(' ');
@@ -172,7 +191,6 @@ function printToDocument(d) {
     return /^[a-zA-Z]*$/.test(str);
   }
  
-   //return charCode > 64 && charCode < 91 || charCode > 96 && charCode < 123; 
 
 
 //function for checking if word is completely solved
