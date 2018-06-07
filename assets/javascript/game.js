@@ -167,7 +167,8 @@ function Stats(m, letters, inc, w, l) {
 }
 
 function ranWord(wordArray) {
-  randomWord = wordArray[Math.floor(Math.random() * wordArray.length)];   //new randomly selected word
+  var selection = Math.floor(Math.random() * wordArray.length)
+  randomWord = wordArray[selection];   //new randomly selected word
   console.log(randomWord);
   return randomWord;
 }
